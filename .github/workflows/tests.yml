@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '22'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Run tests
+        run: ./gradlew test --no-daemon
+        env:
+          HEADLESS: 'true'
+
+      - name: Upload Playwright trace
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-trace
+          path: trace/*.zip
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: build/reports/tests/test/

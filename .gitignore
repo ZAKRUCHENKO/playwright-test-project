@@ -1,0 +1,34 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# IDE - VS Code
+.vscode/
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Playwright (драйвер извлекается в temp, браузеры хранятся вне проекта)
+playwright-java/
+
+# Трейсы — артефакт прогона (в CI публикуется как GitHub artifact)
+trace/

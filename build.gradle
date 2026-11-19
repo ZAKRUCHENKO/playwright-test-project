@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'com.microsoft.playwright:playwright:1.52.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'passed', 'failed', 'skipped'
+        showStandardStreams = true
+    }
+}
+
+// Открыть Trace Viewer: ./gradlew showTrace [-Ptrace=trace/dynamic-loading-trace.zip]
+def traceFile = project.findProperty('trace') ?: 'trace/trace-success.zip'
+tasks.register('showTrace', JavaExec) {
+    group = 'playwright'
+    description = 'Открывает Playwright Trace Viewer для сохранённого трейса'
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.microsoft.playwright.CLI'
+    args = ['show-trace', traceFile]
+}
