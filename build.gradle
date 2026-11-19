@@ -8,10 +8,18 @@ repositories {
 
 dependencies {
     testImplementation 'com.microsoft.playwright:playwright:1.52.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+
+    // JUnit 5: BOM задает общую версию для всех junit-артефактов
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    // Агрегатор API + params (параметризованные тесты)
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Движок запуска тестов
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    // Интеграция платформы JUnit с системой сборки (обязателен для Gradle 9+)
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
     // Jackson для парсинга JSON в API-тестах (Gradle-эквивалент зависимости из pom.xml на mvnrepository.com)
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 }
 
 test {
