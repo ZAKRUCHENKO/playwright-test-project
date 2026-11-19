@@ -7,7 +7,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # ubuntu-latest (26.04) не поддерживается Playwright 1.52
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
