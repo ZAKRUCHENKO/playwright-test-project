@@ -4,6 +4,11 @@ import com.microsoft.playwright.APIRequest;
 import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,6 +41,10 @@ public class TodoApiTest {
     }
 
     @Test
+    @Epic("Playwright API")
+    @Feature("JSONPlaceholder")
+    @Story("GET /todos/1: структура и значения")
+    @Severity(SeverityLevel.CRITICAL)
     void testTodoApi() throws Exception {
         // 1. GET-запрос напрямую через API — браузер не открывается
         APIResponse response = requestContext.get("/todos/1");

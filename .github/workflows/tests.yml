@@ -20,7 +20,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Run tests
-        run: ./gradlew test --no-daemon
+        run: ./gradlew test allureReport --no-daemon
         env:
           HEADLESS: 'true'
 
@@ -30,6 +30,13 @@ jobs:
         with:
           name: playwright-trace
           path: trace/*.zip
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: build/reports/allure-report/
 
       - name: Upload test report
         if: always()

@@ -3,6 +3,12 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 import com.microsoft.playwright.Tracing;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import com.microsoft.playwright.assertions.LocatorAssertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +43,12 @@ public class DynamicLoadingTest extends BaseTest {
     private static final String EXPECTED_TEXT = "Hello World!";
 
     @Test
+    @Epic("Playwright UI")
+    @Feature("Dynamic Loading")
+    @Story("Появление элемента после загрузки")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("UI-тест: запуск загрузки на the-internet.herokuapp.com/dynamic_loading/1, " +
+            "перехват запроса /dynamic_loading (HTTP 200), ожидание 'Hello World!', сохранение трейса")
     void testDynamicLoading() throws IOException {
         BrowserContext context = browser.newContext();
         // herokuapp просыпается медленно — увеличиваем таймауты навигации
